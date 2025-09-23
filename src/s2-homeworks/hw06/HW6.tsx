@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import SuperEditableSpan from './common/c4-SuperEditableSpan/SuperEditableSpan'
-import { restoreState, saveState } from './localStorage/localStorage'
+import {restoreState, saveState} from './localStorage/localStorage'
 import s2 from '../../s1-main/App.module.css'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
 import s from './HW6.module.css'
@@ -18,8 +18,11 @@ const HW6 = () => {
         saveState<string>('hw6-editable-span-value', value)
     }
     const restore = () => {
-        // делают студенты
-
+        const restoreValue = restoreState<string>(
+            'hw6-editable-span-value',
+            ''
+        )// делают студенты
+        setValue(restoreValue)
     }
 
     return (
@@ -35,7 +38,7 @@ const HW6 = () => {
                         onChangeText={setValue}
                         spanProps={{
                             id: 'hw6-editable-span',
-                            defaultText: 'enter text...',
+                            defaultText: 'Edite text...',
                         }}
                     />
                 </div>
