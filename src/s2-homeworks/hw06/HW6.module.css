@@ -6,8 +6,6 @@
 
 .editableSpanContainer {
     display: flex;
-    color: #1372e1;
-    font-weight: bold;
     align-items: center;
     gap: 30px;
     margin-bottom: 10px;
