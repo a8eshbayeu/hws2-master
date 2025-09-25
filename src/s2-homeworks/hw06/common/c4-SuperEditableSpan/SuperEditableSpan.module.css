@@ -1,11 +1,35 @@
 .spanBlock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: border-color 0.2s;
 }
 
 .span {
+    cursor: text;
+    font-size: 16px;
+    color: #288bf4;
+    font-weight: 500;
+    user-select: none;
 }
 
 .input {
+    font-size: 16px;
+    padding: 2px 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .pen {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
 }
