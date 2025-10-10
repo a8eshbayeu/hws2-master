@@ -1,23 +1,45 @@
 .item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ccc; /* серая линия между строками */
 }
 
 .item:last-of-type {
+    border-bottom: none;
 }
 
 .users {
+    width: 100%;
+    border-collapse: collapse; /* убираем границы таблицы */
 }
 
 .buttonsContainer {
+    display: flex;
+    gap: 12px; /* интервал между кнопками */
+    justify-content: flex-end; /* прижимаем кнопки к правому краю контейнера */
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 806px; /* фиксированная ширина */
+    margin: 0; /* центрирование по горизонтали */
 }
 
 .thead {
+    background-color: #959393; /* светло-серый фон */
+    font-weight: bold; /* жирный текст */
+    padding: 8px 12px;
+    text-align: center;
 }
 
 .nameCol {
+    padding: 8px;
+    text-align: left;
 }
 
 .ageCol {
+    text-align: left; /* цифры и заголовок ровно по центру */
+    padding: 8px 12px;
 }

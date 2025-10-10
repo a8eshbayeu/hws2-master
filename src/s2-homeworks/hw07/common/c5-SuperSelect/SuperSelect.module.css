@@ -1,9 +1,34 @@
 .select {
+    width: 180px;
+    height: 24px;
+    padding: 0 24px 0 8px;   /* справа делаем место под стрелку */
+    border: 1px solid #ccc;  /* серая рамка */
+    border-radius: 4px;      /* радиус работает корректно */
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    /* Убираем нативный "электро"-вид */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Добавляем свою стрелочку */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center; /* справа внутри поля */
+    background-size: 12px 8px;
 }
 
 .select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
 }
 
-
-.option:hover {
+/* ⚠️ ВАЖНО: стили для option ограничены нативным селектом */
+.option {
+    font-size: 14px;
+    padding: 4px;
 }
