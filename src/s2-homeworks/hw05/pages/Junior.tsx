@@ -10,8 +10,6 @@ function Junior() {
             <HW6 />
             <HW7 />
             <HW8 />
-            {/*<HW7 />*/}
-            {/*<HW8 />*/}
             {/*<HW9 />*/}
         </div>
     )

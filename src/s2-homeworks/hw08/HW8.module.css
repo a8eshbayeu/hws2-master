@@ -1,6 +1,6 @@
 .item {
     padding: 8px 12px;
-    border-bottom: 1px solid #ccc; /* серая линия между строками */
+    border-bottom: 1px solid #ccc;
 }
 
 .item:last-of-type {
@@ -9,13 +9,13 @@
 
 .users {
     width: 100%;
-    border-collapse: collapse; /* убираем границы таблицы */
+    border-collapse: collapse;
 }
 
 .buttonsContainer {
     display: flex;
-    gap: 12px; /* интервал между кнопками */
-    justify-content: flex-end; /* прижимаем кнопки к правому краю контейнера */
+    gap: 12px;
+    justify-content: flex-end;
 }
 
 .container {
@@ -23,13 +23,13 @@
     flex-direction: column;
     gap: 20px;
 
-    width: 806px; /* фиксированная ширина */
-    margin: 0; /* центрирование по горизонтали */
+    width: 806px;
+    margin: 0;
 }
 
 .thead {
-    background-color: #959393; /* светло-серый фон */
-    font-weight: bold; /* жирный текст */
+    background-color: #959393;
+    font-weight: bold;
     padding: 8px 12px;
     text-align: center;
 }
@@ -40,6 +40,6 @@
 }
 
 .ageCol {
-    text-align: left; /* цифры и заголовок ровно по центру */
+    text-align: left;
     padding: 8px 12px;
 }
