@@ -8,8 +8,13 @@ function Junior() {
     return (
         <div id={'hw5-page-junior'}>
             <HW6 />
+<<<<<<< HEAD
             <HW7 />
             <HW8 />
+=======
+            {/*<HW7 />*/}
+            {/*<HW8 />*/}
+>>>>>>> ced41521d007d291d2aa5715e4573fed8a190b38
             {/*<HW9 />*/}
         </div>
     )
