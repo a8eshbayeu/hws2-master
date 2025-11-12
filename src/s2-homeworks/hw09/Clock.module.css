@@ -1,14 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
 .buttonsContainer {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-top: 16px;
 }
 
 .clock {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-align: left;
+    align-items: flex-start;
+    color: #222;
+    padding: 20px;
 }
 
 .watch {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .watch strong {
+    font-size: 28px;
+    color: #000;
 }
 
 .more {
+    font-size: 16px;
+    color: #959393;
 }
