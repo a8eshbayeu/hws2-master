@@ -21,7 +21,7 @@ const SuperRange: React.FC<SliderProps> = (props) => {
                     },
                 },
                 '& .MuiSlider-rail': {
-                    backgroundColor: '#8B8B8B', // серый задний трек
+                    backgroundColor: '#8B8B8B',
                     opacity: 1,
                     height: 4,
                 },
