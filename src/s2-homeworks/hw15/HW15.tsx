@@ -4,7 +4,8 @@ import s from './HW15.module.css'
 import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
-import SuperSort from './common/c10-SuperSort/SuperSort'
+import SuperSort, {pureChange} from './common/c10-SuperSort/SuperSort'
+import { CircularProgress } from '@mui/material'
 
 /*
 * 1 - дописать SuperPagination
@@ -47,47 +48,47 @@ const HW15 = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [techs, setTechs] = useState<TechType[]>([])
 
-    const sendQuery = (params: any) => {
+    const sendQuery = (params: ParamsType) => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
-                // делает студент
-
-                // сохранить пришедшие данные
-
-                //
+                if (res && res.data) { // делает студент
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
+                } // сохранить пришедшие данные
             })
+            .finally(() => setLoading(false))
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
 
-        // setPage(
-        // setCount(
+        setPage(newPage)
+        setCount(newCount)
 
-        // sendQuery(
-        // setSearchParams(
-
-        //
+        sendQuery({page: newPage, count: newCount, sort})
+        setSearchParams({page: String(newPage), count: String(newCount), sort})
     }
 
     const onChangeSort = (newSort: string) => {
         // делает студент
+        setSort(newSort)
+        setPage(1) // при сортировке сбрасывать на 1 страницу
 
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
-
-        // sendQuery(
-        // setSearchParams(
-
-        //
+        sendQuery({page: 1, count, sort: newSort})
+        setSearchParams({page: '1', count: String(count), sort: newSort})
     }
 
     useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery({page: params.page, count: params.count})
-        setPage(+params.page || 1)
-        setCount(+params.count || 4)
+        const paramsObj = Object.fromEntries(searchParams)
+        const pageParam = +paramsObj.page || 1
+        const countParam = +paramsObj.count || 4
+        const sortParam = paramsObj.sort || ''
+
+        setPage(pageParam)
+        setCount(countParam)
+        setSort(sortParam)
+        sendQuery({page: pageParam, count: countParam, sort: sortParam})
     }, [])
 
     const mappedTechs = techs.map(t => (
@@ -106,8 +107,10 @@ const HW15 = () => {
         <div id={'hw15'}>
             <div className={s2.hwTitle}>Homework #15</div>
 
-            <div className={s2.hw}>
-                {idLoading && <div id={'hw15-loading'} className={s.loading}>Loading...</div>}
+            <div className={`${s2.hw} ${s.contentWrapper}`}>
+                {idLoading && <div id={'hw15-loading'} className={s.loading}>
+                    <CircularProgress size={100}/>
+                </div>}
 
                 <SuperPagination
                     page={page}
@@ -117,13 +120,13 @@ const HW15 = () => {
                 />
 
                 <div className={s.rowHeader}>
-                    <div className={s.techHeader}>
-                        tech
+                    <div className={s.techHeader} onClick={() => onChangeSort(pureChange(sort, '1tech', '0tech'))}>
+                        Tech
                         <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
-                    <div className={s.developerHeader}>
-                        developer
+                    <div className={s.developerHeader} onClick={() => onChangeSort(pureChange(sort, '1developer', '0developer'))}>
+                        Developer
                         <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
                     </div>
                 </div>

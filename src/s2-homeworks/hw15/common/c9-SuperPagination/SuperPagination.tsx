@@ -11,19 +11,22 @@ export type SuperPaginationPropsType = {
     onChange: (page: number, count: number) => void
 }
 
-const SuperPagination: React.FC<SuperPaginationPropsType> = (
-    {
-        page, itemsCountForPage, totalCount, onChange, id = 'hw15',
-    }
-) => {
-    const lastPage = 10 // пишет студент // вычислить количество страниц
+const SuperPagination: React.FC<SuperPaginationPropsType> = ({
+                                                                 page,
+                                                                 itemsCountForPage,
+                                                                 totalCount,
+                                                                 onChange,
+                                                                 id = 'hw15',
+                                                             }) => {
+    const lastPage = Math.ceil(totalCount / itemsCountForPage) // пишет студент // вычислить количество страниц
 
-    const onChangeCallback = (event: any, page: number) => {
-        // пишет студент
+    const onChangeCallback = (event: React.ChangeEvent<unknown>, page: number) => {
+        onChange(page, itemsCountForPage) // пишет студент
     }
 
-    const onChangeSelect = (event: any) => {
-        // пишет студент
+    const onChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newCount = Number(event.currentTarget.value)
+        onChange(1, newCount)// пишет студент
     }
 
     return (
@@ -31,7 +34,16 @@ const SuperPagination: React.FC<SuperPaginationPropsType> = (
             <Pagination
                 id={id + '-pagination'}
                 sx={{
-                    // стили для Pagination // пишет студент
+                    '& .MuiPaginationItem-root': {
+                        borderRadius: '4px',
+                    },
+                    '& .MuiPaginationItem-root.Mui-selected': {
+                        backgroundColor: '#1976d2',
+                        color: '#fff',
+                    },
+                    '& .MuiPaginationItem-root:not(.Mui-selected):hover': {
+                        backgroundColor: '#1565c0',
+                    }, // стили для Pagination // пишет студент
                 }}
                 page={page}
                 count={lastPage}

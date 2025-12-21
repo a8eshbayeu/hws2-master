@@ -1,7 +1,19 @@
 .tech {
+    padding: 6px 10px;
+    margin-top: 4px;
 
+    font-size: 14px;
+    color: #2d2d2d;
+
+    background-color: #f5f7fa;
+    border-radius: 4px;
 }
 
 .loading {
+    min-height: 20px;
+    margin: 8px 0;
 
+    font-size: 14px;
+    color: #7a7a7a;
+    text-align: center;
 }
