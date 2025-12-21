@@ -5,7 +5,7 @@ import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
 import SuperSort, {pureChange} from './common/c10-SuperSort/SuperSort'
-import { CircularProgress } from '@mui/material'
+import {CircularProgress} from '@mui/material'
 
 /*
 * 1 - дописать SuperPagination
@@ -75,9 +75,34 @@ const HW15 = () => {
         setSort(newSort)
         setPage(1) // при сортировке сбрасывать на 1 страницу
 
-        sendQuery({page: 1, count, sort: newSort})
-        setSearchParams({page: '1', count: String(count), sort: newSort})
+        setLoading(true)
+        getTechs({ page: 1, count, sort: newSort })
+            .then(res => {
+                if (res && res.data) {
+                    // Фронтэнд сортировка, если сервер не сортирует
+                    let sortedTechs = [...res.data.techs]
+
+                    if (newSort === '1tech') {
+                        sortedTechs.sort((a, b) => a.tech.localeCompare(b.tech))
+                    } else if (newSort === '0tech') {
+                        sortedTechs.sort((a, b) => b.tech.localeCompare(a.tech))
+                    } else if (newSort === '1developer') {
+                        sortedTechs.sort((a, b) => a.developer.localeCompare(b.developer))
+                    } else if (newSort === '0developer') {
+                        sortedTechs.sort((a, b) => b.developer.localeCompare(a.developer))
+                    }
+
+                    setTechs(sortedTechs)
+                    setTotalCount(res.data.totalCount)
+                }
+            })
+            .finally(() => setLoading(false))
+
+        setSearchParams({ page: '1', count: String(count), sort: newSort })
     }
+    //     sendQuery({page: 1, count, sort: newSort})
+    //     setSearchParams({page: '1', count: String(count), sort: newSort})
+    // }
 
     useEffect(() => {
         const paramsObj = Object.fromEntries(searchParams)
@@ -125,7 +150,8 @@ const HW15 = () => {
                         <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
-                    <div className={s.developerHeader} onClick={() => onChangeSort(pureChange(sort, '1developer', '0developer'))}>
+                    <div className={s.developerHeader}
+                         onClick={() => onChangeSort(pureChange(sort, '1developer', '0developer'))}>
                         Developer
                         <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
                     </div>
