@@ -4,7 +4,7 @@ import s from './HW15.module.css'
 import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
-import SuperSort, {pureChange} from './common/c10-SuperSort/SuperSort'
+import SuperSort from './common/c10-SuperSort/SuperSort'
 import {CircularProgress} from '@mui/material'
 
 /*
@@ -42,7 +42,7 @@ const getTechs = (params: ParamsType) => {
 const HW15 = () => {
     const [sort, setSort] = useState('')
     const [page, setPage] = useState(1)
-    const [count, setCount] = useState(4)
+    const [count, setCount] = useState(10)
     const [idLoading, setLoading] = useState(false)
     const [totalCount, setTotalCount] = useState(100)
     const [searchParams, setSearchParams] = useSearchParams()
@@ -74,12 +74,13 @@ const HW15 = () => {
         setSort(newSort)
         setPage(1)
 
-        sendQuery({
+        const params = {
             page: 1,
             count,
             sort: newSort,
-        })
+        }
 
+        sendQuery(params)
         setSearchParams({
             page: '1',
             count: String(count),
@@ -128,13 +129,12 @@ const HW15 = () => {
                 />
 
                 <div className={s.rowHeader}>
-                    <div className={s.techHeader} onClick={() => onChangeSort(pureChange(sort, '1tech', '0tech'))}>
+                    <div className={s.techHeader}>
                         Tech
                         <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
-                    <div className={s.developerHeader}
-                         onClick={() => onChangeSort(pureChange(sort, '1developer', '0developer'))}>
+                    <div className={s.developerHeader}>
                         Developer
                         <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
                     </div>
