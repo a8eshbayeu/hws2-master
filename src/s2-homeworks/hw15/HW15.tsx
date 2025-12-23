@@ -71,38 +71,21 @@ const HW15 = () => {
     }
 
     const onChangeSort = (newSort: string) => {
-        // делает студент
         setSort(newSort)
-        setPage(1) // при сортировке сбрасывать на 1 страницу
+        setPage(1)
 
-        setLoading(true)
-        getTechs({ page: 1, count, sort: newSort })
-            .then(res => {
-                if (res && res.data) {
-                    // Фронтэнд сортировка, если сервер не сортирует
-                    let sortedTechs = [...res.data.techs]
+        sendQuery({
+            page: 1,
+            count,
+            sort: newSort,
+        })
 
-                    if (newSort === '1tech') {
-                        sortedTechs.sort((a, b) => a.tech.localeCompare(b.tech))
-                    } else if (newSort === '0tech') {
-                        sortedTechs.sort((a, b) => b.tech.localeCompare(a.tech))
-                    } else if (newSort === '1developer') {
-                        sortedTechs.sort((a, b) => a.developer.localeCompare(b.developer))
-                    } else if (newSort === '0developer') {
-                        sortedTechs.sort((a, b) => b.developer.localeCompare(a.developer))
-                    }
-
-                    setTechs(sortedTechs)
-                    setTotalCount(res.data.totalCount)
-                }
-            })
-            .finally(() => setLoading(false))
-
-        setSearchParams({ page: '1', count: String(count), sort: newSort })
+        setSearchParams({
+            page: '1',
+            count: String(count),
+            sort: newSort,
+        })
     }
-    //     sendQuery({page: 1, count, sort: newSort})
-    //     setSearchParams({page: '1', count: String(count), sort: newSort})
-    // }
 
     useEffect(() => {
         const paramsObj = Object.fromEntries(searchParams)
